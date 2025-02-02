@@ -3,6 +3,7 @@ from flask import Flask , request , jsonify
 import google, googleapiclient
 import google.generativeai as genai
 import os , jinja2, logging
+import requests
 from dotenv import load_dotenv
 
 from LLMservice import LLMcall
@@ -21,6 +22,9 @@ app = Flask(__name__)
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
 code_prompt = env.get_template('prompts/coding_prompt.j2')
 filename_prompt = env.get_template('prompts/sumarize_filename.j2')
+
+LLMurl = "http://127.0.0.1:5050/llmcall"
+
 
 # Function for coding
 def code(topic, language, code_prompt):
@@ -81,12 +85,20 @@ def generate_code():
             logging.error("Data is missing")
             return jsonify({"error": "Data is missing"}), 400
         else:
-            code_response = code(topic, language, code_prompt)
+            #code_response = code(topic, language, code_prompt)
+            rendered_code_prompt = code_prompt.render(topic=topic, language=language)
+            code_payload = {"prompt": rendered_code_prompt}
+            code_response = requests.post(LLMurl, json=code_payload)
+            
 
             if code_response is None:
                 return jsonify({"error": "Code generation failed"}), 500
             else:
-                code_filename = filename(topic, filename_prompt)
+                #code_filename = filename(topic, filename_prompt)
+                rendered_filename_prompt = filename_prompt.render(topic=topic)
+                filename_payload = {"prompt": rendered_filename_prompt}
+                code_filename = requests.post(LLMurl, json=filename_payload)
+                
 
                 if code_filename is None:
                     return jsonify({"error": "Filename generation failed"}), 500
@@ -97,7 +109,7 @@ def generate_code():
             file = os.path.join(output_dir, f"{code_filename}.html") 
             # save in a file
             with open(file, "w") as f:
-                f.write(code_response)
+                f.write(str(code_response))
                 logging.info("File saved successfully")
 
             return jsonify({"message": "File saved successfully)"})
@@ -118,4 +130,4 @@ def healthcheck():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5000)

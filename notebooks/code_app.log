@@ -206,3 +206,207 @@ Write the program in c language.
 2025-02-02 20:27:45,304 - INFO - Filename generation completed
 2025-02-02 20:27:45,305 - INFO - File saved successfully
 2025-02-02 20:27:45,306 - INFO - 127.0.0.1 - - [02/Feb/2025 20:27:45] "POST /code HTTP/1.1" 200 -
+2025-02-02 20:32:50,180 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5010
+2025-02-02 20:32:50,180 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 20:32:50,181 - INFO -  * Restarting with stat
+2025-02-02 20:32:50,550 - WARNING -  * Debugger is active!
+2025-02-02 20:32:50,559 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:33:21,958 - INFO - 127.0.0.1 - - [02/Feb/2025 20:33:21] "GET /health HTTP/1.1" 200 -
+2025-02-02 20:33:22,029 - INFO - 127.0.0.1 - - [02/Feb/2025 20:33:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-02 20:42:05,475 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-02-02 20:42:05,475 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 20:42:05,476 - INFO -  * Restarting with stat
+2025-02-02 20:42:05,867 - WARNING -  * Debugger is active!
+2025-02-02 20:42:05,873 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:42:42,807 - INFO - 127.0.0.1 - - [02/Feb/2025 20:42:42] "GET /health HTTP/1.1" 200 -
+2025-02-02 20:42:42,889 - INFO - 127.0.0.1 - - [02/Feb/2025 20:42:42] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-02 20:43:24,422 - INFO - 127.0.0.1 - - [02/Feb/2025 20:43:24] "[35m[1mPOST /llmcall HTTP/1.1[0m" 500 -
+2025-02-02 20:45:24,767 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-02-02 20:45:24,767 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 20:45:24,767 - INFO -  * Restarting with stat
+2025-02-02 20:45:25,139 - WARNING -  * Debugger is active!
+2025-02-02 20:45:25,144 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:45:32,469 - INFO - LLM response generated
+2025-02-02 20:45:32,491 - INFO - 127.0.0.1 - - [02/Feb/2025 20:45:32] "[35m[1mPOST /llmcall HTTP/1.1[0m" 500 -
+2025-02-02 20:46:32,167 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-02-02 20:46:32,168 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 20:46:32,169 - INFO -  * Restarting with stat
+2025-02-02 20:46:32,547 - WARNING -  * Debugger is active!
+2025-02-02 20:46:32,552 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:46:37,727 - INFO - LLM response generated
+2025-02-02 20:46:37,747 - INFO - 127.0.0.1 - - [02/Feb/2025 20:46:37] "[35m[1mPOST /llmcall HTTP/1.1[0m" 500 -
+2025-02-02 20:49:43,796 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 20:49:43,897 - INFO -  * Restarting with stat
+2025-02-02 20:49:44,529 - WARNING -  * Debugger is active!
+2025-02-02 20:49:44,535 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:49:50,735 - INFO - LLM response generated
+2025-02-02 20:49:50,736 - INFO - 127.0.0.1 - - [02/Feb/2025 20:49:50] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 20:50:09,101 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 20:50:09,200 - INFO -  * Restarting with stat
+2025-02-02 20:50:09,717 - WARNING -  * Debugger is active!
+2025-02-02 20:50:09,722 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:50:14,080 - INFO - LLM response generated
+2025-02-02 20:50:14,083 - INFO - 127.0.0.1 - - [02/Feb/2025 20:50:14] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 20:50:33,227 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 20:50:33,333 - INFO -  * Restarting with stat
+2025-02-02 20:50:33,952 - WARNING -  * Debugger is active!
+2025-02-02 20:50:33,957 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:50:37,436 - INFO - LLM response generated
+2025-02-02 20:50:37,438 - INFO - 127.0.0.1 - - [02/Feb/2025 20:50:37] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 20:50:52,358 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 20:50:52,472 - INFO -  * Restarting with stat
+2025-02-02 20:50:53,028 - WARNING -  * Debugger is active!
+2025-02-02 20:50:53,032 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:50:57,502 - INFO - LLM response generated
+2025-02-02 20:50:57,503 - INFO - 127.0.0.1 - - [02/Feb/2025 20:50:57] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 20:51:16,756 - INFO - LLM response generated
+2025-02-02 20:51:16,758 - INFO - 127.0.0.1 - - [02/Feb/2025 20:51:16] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 20:51:39,089 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 20:51:39,182 - INFO -  * Restarting with stat
+2025-02-02 20:51:39,739 - WARNING -  * Debugger is active!
+2025-02-02 20:51:39,744 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:52:01,180 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 20:52:01,273 - INFO -  * Restarting with stat
+2025-02-02 20:52:01,780 - WARNING -  * Debugger is active!
+2025-02-02 20:52:01,785 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:52:10,414 - INFO - LLM response generated
+2025-02-02 20:52:10,416 - INFO - 127.0.0.1 - - [02/Feb/2025 20:52:10] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 20:52:24,319 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 20:52:24,404 - INFO -  * Restarting with stat
+2025-02-02 20:52:24,975 - WARNING -  * Debugger is active!
+2025-02-02 20:52:24,980 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:52:57,328 - INFO - 127.0.0.1 - - [02/Feb/2025 20:52:57] "GET /health HTTP/1.1" 200 -
+2025-02-02 20:53:54,989 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 20:53:55,086 - INFO -  * Restarting with stat
+2025-02-02 20:53:55,719 - WARNING -  * Debugger is active!
+2025-02-02 20:53:55,724 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:56:59,738 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 20:56:59,845 - INFO -  * Restarting with stat
+2025-02-02 20:57:00,531 - WARNING -  * Debugger is active!
+2025-02-02 20:57:00,539 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:58:07,079 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 20:58:07,176 - INFO -  * Restarting with stat
+2025-02-02 20:58:07,706 - WARNING -  * Debugger is active!
+2025-02-02 20:58:07,710 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:58:56,761 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 20:58:56,859 - INFO -  * Restarting with stat
+2025-02-02 20:58:57,437 - WARNING -  * Debugger is active!
+2025-02-02 20:58:57,441 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 20:59:19,912 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 20:59:20,003 - INFO -  * Restarting with stat
+2025-02-02 20:59:20,576 - WARNING -  * Debugger is active!
+2025-02-02 20:59:20,581 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:01:46,589 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 21:01:46,589 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 21:01:46,590 - INFO -  * Restarting with stat
+2025-02-02 21:01:46,964 - WARNING -  * Debugger is active!
+2025-02-02 21:01:46,973 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:01:57,633 - INFO - 127.0.0.1 - - [02/Feb/2025 21:01:57] "[33mGET /welcome HTTP/1.1[0m" 404 -
+2025-02-02 21:02:10,036 - INFO - 127.0.0.1 - - [02/Feb/2025 21:02:10] "[33mGET / HTTP/1.1[0m" 404 -
+2025-02-02 21:02:12,037 - INFO - 127.0.0.1 - - [02/Feb/2025 21:02:12] "GET /health HTTP/1.1" 200 -
+2025-02-02 21:02:16,106 - INFO - 127.0.0.1 - - [02/Feb/2025 21:02:16] "GET /health HTTP/1.1" 200 -
+2025-02-02 21:03:12,301 - INFO - Received data: {'topic': 'Area of square', 'language': 'python'}
+2025-02-02 21:03:17,548 - INFO - LLM response generated
+2025-02-02 21:03:17,549 - INFO - 127.0.0.1 - - [02/Feb/2025 21:03:17] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:03:17,746 - INFO - LLM response generated
+2025-02-02 21:03:17,747 - INFO - 127.0.0.1 - - [02/Feb/2025 21:03:17] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:03:17,749 - ERROR - An unexpected error occurred: write() argument must be str, not Response
+2025-02-02 21:03:17,750 - INFO - 127.0.0.1 - - [02/Feb/2025 21:03:17] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 21:13:45,714 - INFO - 127.0.0.1 - - [02/Feb/2025 21:13:45] "GET /health HTTP/1.1" 200 -
+2025-02-02 21:17:17,446 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 21:17:17,551 - INFO -  * Restarting with stat
+2025-02-02 21:17:18,225 - WARNING -  * Debugger is active!
+2025-02-02 21:17:18,231 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:17:57,993 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 21:17:58,080 - INFO -  * Restarting with stat
+2025-02-02 21:17:58,722 - WARNING -  * Debugger is active!
+2025-02-02 21:17:58,727 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:18:11,999 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 21:18:12,071 - INFO -  * Restarting with stat
+2025-02-02 21:18:12,575 - WARNING -  * Debugger is active!
+2025-02-02 21:18:12,580 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:18:38,427 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 21:18:38,427 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 21:18:38,428 - INFO -  * Restarting with stat
+2025-02-02 21:18:38,804 - WARNING -  * Debugger is active!
+2025-02-02 21:18:38,810 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:18:45,053 - INFO - Received data: {'topic': 'Area of square', 'language': 'python'}
+2025-02-02 21:18:49,401 - INFO - LLM response generated
+2025-02-02 21:18:49,403 - INFO - 127.0.0.1 - - [02/Feb/2025 21:18:49] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:18:49,404 - ERROR - An unexpected error occurred: 'Response' object has no attribute 'get'
+2025-02-02 21:18:49,405 - INFO - 127.0.0.1 - - [02/Feb/2025 21:18:49] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 21:22:16,151 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 21:22:16,250 - INFO -  * Restarting with stat
+2025-02-02 21:22:16,865 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 21:22:16,888 - WARNING -  * Debugger is active!
+2025-02-02 21:22:16,897 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:22:16,985 - INFO -  * Restarting with stat
+2025-02-02 21:22:17,406 - WARNING -  * Debugger is active!
+2025-02-02 21:22:17,410 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:22:30,712 - INFO - LLM response generated
+2025-02-02 21:22:30,715 - INFO - 127.0.0.1 - - [02/Feb/2025 21:22:30] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:23:09,512 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 21:23:09,640 - INFO -  * Restarting with stat
+2025-02-02 21:23:10,102 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 21:23:10,193 - INFO -  * Restarting with stat
+2025-02-02 21:23:10,289 - WARNING -  * Debugger is active!
+2025-02-02 21:23:10,294 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:23:10,584 - WARNING -  * Debugger is active!
+2025-02-02 21:23:10,588 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:23:26,085 - INFO - 127.0.0.1 - - [02/Feb/2025 21:23:26] "GET /health HTTP/1.1" 200 -
+2025-02-02 21:23:29,292 - INFO - 127.0.0.1 - - [02/Feb/2025 21:23:29] "GET /health HTTP/1.1" 200 -
+2025-02-02 21:23:48,974 - INFO - Received data: {'topic': 'Area of triangle', 'language': 'c'}
+2025-02-02 21:23:55,120 - INFO - LLM response generated
+2025-02-02 21:23:55,120 - INFO - 127.0.0.1 - - [02/Feb/2025 21:23:55] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:23:55,312 - INFO - LLM response generated
+2025-02-02 21:23:55,313 - INFO - 127.0.0.1 - - [02/Feb/2025 21:23:55] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:23:55,314 - ERROR - An unexpected error occurred: write() argument must be str, not Response
+2025-02-02 21:23:55,314 - INFO - 127.0.0.1 - - [02/Feb/2025 21:23:55] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 21:25:42,609 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 21:25:42,829 - INFO -  * Restarting with stat
+2025-02-02 21:25:42,896 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/code_developer.py', reloading
+2025-02-02 21:25:42,990 - INFO -  * Restarting with stat
+2025-02-02 21:25:43,451 - WARNING -  * Debugger is active!
+2025-02-02 21:25:43,462 - WARNING -  * Debugger is active!
+2025-02-02 21:25:43,465 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:25:43,469 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:25:53,300 - INFO - Received data: {'topic': 'Area of triangle', 'language': 'c'}
+2025-02-02 21:25:59,822 - INFO - LLM response generated
+2025-02-02 21:25:59,823 - INFO - 127.0.0.1 - - [02/Feb/2025 21:25:59] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:26:00,022 - INFO - LLM response generated
+2025-02-02 21:26:00,023 - INFO - 127.0.0.1 - - [02/Feb/2025 21:26:00] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:26:00,025 - INFO - File saved successfully
+2025-02-02 21:26:00,027 - INFO - 127.0.0.1 - - [02/Feb/2025 21:26:00] "POST /code HTTP/1.1" 200 -
+2025-02-02 21:27:12,537 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 21:27:12,538 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 21:27:12,653 - INFO -  * Restarting with stat
+2025-02-02 21:27:12,653 - INFO -  * Restarting with stat
+2025-02-02 21:27:13,341 - WARNING -  * Debugger is active!
+2025-02-02 21:27:13,341 - WARNING -  * Debugger is active!
+2025-02-02 21:27:13,348 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:27:13,348 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:27:31,330 - INFO - Received data: {'topic': 'Area of triangle', 'language': 'c'}
+2025-02-02 21:27:37,254 - INFO - LLM response generated
+2025-02-02 21:27:37,256 - INFO - 127.0.0.1 - - [02/Feb/2025 21:27:37] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:27:37,441 - INFO - LLM response generated
+2025-02-02 21:27:37,442 - INFO - 127.0.0.1 - - [02/Feb/2025 21:27:37] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:27:37,445 - INFO - File saved successfully
+2025-02-02 21:27:37,447 - INFO - 127.0.0.1 - - [02/Feb/2025 21:27:37] "POST /code HTTP/1.1" 200 -
+2025-02-02 21:28:27,992 - INFO - LLM response generated
+2025-02-02 21:28:27,994 - INFO - 127.0.0.1 - - [02/Feb/2025 21:28:27] "POST /llmcall HTTP/1.1" 200 -
+2025-02-02 21:28:55,812 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 21:28:55,812 - INFO -  * Detected change in '/Users/arin/Github/genAInotebooks/notebooks/LLMservice.py', reloading
+2025-02-02 21:28:55,924 - INFO -  * Restarting with stat
+2025-02-02 21:28:55,924 - INFO -  * Restarting with stat
+2025-02-02 21:28:56,533 - WARNING -  * Debugger is active!
+2025-02-02 21:28:56,537 - WARNING -  * Debugger is active!
+2025-02-02 21:28:56,539 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:28:56,541 - INFO -  * Debugger PIN: 140-836-663
+2025-02-02 21:29:01,684 - INFO - LLM response generated
+2025-02-02 21:29:01,685 - INFO - 127.0.0.1 - - [02/Feb/2025 21:29:01] "POST /llmcall HTTP/1.1" 200 -
