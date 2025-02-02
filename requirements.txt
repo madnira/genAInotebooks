@@ -1,0 +1,7 @@
+numpy
+panda
+google
+langchain
+load_dotenv
+jsonify
+jinja2

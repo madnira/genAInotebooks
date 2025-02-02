@@ -1,0 +1,83 @@
+Several approaches can be used to check if a given string represents a palindrome number in Python. Here are two efficient methods:
+
+**Method 1:  String Reversal**
+
+This method reverses the string and compares it to the original. It's straightforward and easy to understand.
+
+```python
+def is_palindrome_string(text):
+    """
+    Checks if a given string is a palindrome (ignoring case and non-alphanumeric characters).
+
+    Args:
+        text: The input string.
+
+    Returns:
+        True if the string is a palindrome, False otherwise.  Returns False for empty strings.
+    """
+    processed_text = ''.join(c for c in text.lower() if c.isalnum())  #Cleanse the string
+
+    if not processed_text: #Handle empty strings
+        return False
+
+    return processed_text == processed_text[::-1]
+
+
+#Example Usage
+string1 = "racecar"
+string2 = "A man, a plan, a canal: Panama"
+string3 = "hello"
+string4 = "" #Empty String
+
+print(f"'{string1}' is a palindrome: {is_palindrome_string(string1)}")  # Output: True
+print(f"'{string2}' is a palindrome: {is_palindrome_string(string2)}")  # Output: True
+print(f"'{string3}' is a palindrome: {is_palindrome_string(string3)}")  # Output: False
+print(f"'{string4}' is a palindrome: {is_palindrome_string(string4)}")  # Output: False
+
+```
+
+**Method 2: Two-Pointer Approach**
+
+This method uses two pointers, one at the beginning and one at the end of the string, and compares characters until they meet in the middle.  This is generally more efficient for very large strings.
+
+
+```python
+def is_palindrome_two_pointers(text):
+    """
+    Checks if a given string is a palindrome using a two-pointer approach (ignoring case and non-alphanumeric characters).
+
+    Args:
+        text: The input string.
+
+    Returns:
+        True if the string is a palindrome, False otherwise. Returns False for empty strings.
+    """
+    processed_text = ''.join(c for c in text.lower() if c.isalnum())
+
+    if not processed_text: #Handle empty strings
+        return False
+
+    left = 0
+    right = len(processed_text) - 1
+
+    while left < right:
+        if processed_text[left] != processed_text[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+
+# Example Usage (same output as Method 1)
+string1 = "racecar"
+string2 = "A man, a plan, a canal: Panama"
+string3 = "hello"
+string4 = "" #Empty String
+
+print(f"'{string1}' is a palindrome: {is_palindrome_two_pointers(string1)}")  # Output: True
+print(f"'{string2}' is a palindrome: {is_palindrome_two_pointers(string2)}")  # Output: True
+print(f"'{string3}' is a palindrome: {is_palindrome_two_pointers(string3)}")  # Output: False
+print(f"'{string4}' is a palindrome: {is_palindrome_two_pointers(string4)}")  # Output: False
+```
+
+Both methods effectively handle palindromes with spaces, punctuation, and differing capitalization.  The two-pointer approach might be slightly faster for very long strings, but the string reversal method is arguably more concise and readable.  Choose the method that best suits your needs and coding style.

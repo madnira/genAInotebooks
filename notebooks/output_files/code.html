@@ -1,0 +1,62 @@
+Several approaches exist to find the first 50 prime numbers in Python. Here are two versions: one optimized for clarity, and another optimized for speed (especially useful when searching for many more primes).
+
+
+**Version 1:  Clear and Concise**
+
+This version prioritizes readability and is easier to understand for beginners.
+
+```python
+def is_prime(num):
+  """Checks if a number is prime."""
+  if num <= 1:
+    return False
+  for i in range(2, int(num**0.5) + 1):
+    if num % i == 0:
+      return False
+  return True
+
+primes = []
+num = 2
+while len(primes) < 50:
+  if is_prime(num):
+    primes.append(num)
+  num += 1
+
+print("The first 50 prime numbers are:", primes)
+```
+
+This code first defines a function `is_prime` to efficiently check primality.  The main loop iterates, checking each number and adding it to the `primes` list until 50 primes are found.
+
+
+**Version 2:  Optimized for Speed (Sieve of Eratosthenes)**
+
+For larger numbers of primes, the Sieve of Eratosthenes algorithm provides significantly better performance.
+
+```python
+def sieve_of_eratosthenes(limit):
+    """Generates primes up to a given limit using the Sieve of Eratosthenes."""
+    primes = []
+    is_prime = [True] * (limit + 1)
+    is_prime[0] = is_prime[1] = False
+
+    for p in range(2, int(limit**0.5) + 1):
+        if is_prime[p]:
+            for i in range(p * p, limit + 1, p):
+                is_prime[i] = False
+
+    for p in range(2, limit + 1):
+        if is_prime[p]:
+            primes.append(p)
+    return primes
+
+
+limit = 300  # We need to set a limit large enough to find at least 50 primes.
+first_50_primes = sieve_of_eratosthenes(limit)[:50]
+print("The first 50 prime numbers are:", first_50_primes)
+
+```
+
+The Sieve of Eratosthenes is more efficient because it avoids repeated checks for divisibility.  It creates a boolean array to track prime numbers, marking non-primes as it goes.  We then need to estimate an upper bound (`limit`) to ensure we find at least 50 primes.  A simple approximation is sufficient for this task.
+
+
+Both versions achieve the same result, but Version 2 is considerably faster for finding a larger number of primes. Choose the version that best suits your needs and understanding.  For just the first 50 primes, the difference in execution time is negligible, but for finding thousands or millions of primes, the Sieve method is vastly superior.
