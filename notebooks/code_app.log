@@ -1,0 +1,145 @@
+2025-02-02 11:21:30,449 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 11:21:30,449 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 11:21:59,593 - INFO - 127.0.0.1 - - [02/Feb/2025 11:21:59] "[31m[1mPOST /health HTTP/1.1[0m" 405 -
+2025-02-02 11:22:27,853 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 11:22:27,853 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 11:22:41,568 - INFO - 127.0.0.1 - - [02/Feb/2025 11:22:41] "GET /health HTTP/1.1" 200 -
+2025-02-02 11:24:32,749 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 11:24:32,749 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 11:24:40,709 - INFO - 127.0.0.1 - - [02/Feb/2025 11:24:40] "[33mGET / HTTP/1.1[0m" 404 -
+2025-02-02 11:24:42,540 - INFO - 127.0.0.1 - - [02/Feb/2025 11:24:42] "GET /health HTTP/1.1" 200 -
+2025-02-02 11:25:59,021 - INFO - 127.0.0.1 - - [02/Feb/2025 11:25:59] "[33mPOST / HTTP/1.1[0m" 404 -
+2025-02-02 11:26:09,787 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 11:26:09,787 - INFO - Code generation started
+2025-02-02 11:26:12,796 - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: timed out
+2025-02-02 11:26:15,798 - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: timed out
+2025-02-02 11:26:15,799 - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: [Errno 64] Host is down
+2025-02-02 11:26:15,800 - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2025-02-02 11:26:15,800 - INFO - An unexpected error occurred: 
+  No API_KEY or ADC found. Please either:
+    - Set the `GOOGLE_API_KEY` environment variable.
+    - Manually pass the key with `genai.configure(api_key=my_api_key)`.
+    - Or set up Application Default Credentials, see https://ai.google.dev/gemini-api/docs/oauth for more information.
+2025-02-02 11:26:15,800 - ERROR - An unexpected error occurred: local variable 'filename' referenced before assignment
+2025-02-02 11:26:15,801 - INFO - 127.0.0.1 - - [02/Feb/2025 11:26:15] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 11:31:11,277 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 11:31:11,277 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 11:31:14,502 - INFO - 127.0.0.1 - - [02/Feb/2025 11:31:14] "GET /health HTTP/1.1" 200 -
+2025-02-02 11:31:21,427 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 11:31:21,428 - INFO - Code generation started
+2025-02-02 11:31:27,801 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 11:31:27,801 - INFO - Filename generation started
+2025-02-02 11:31:28,027 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 11:31:28,028 - ERROR - An unexpected error occurred: 'NoneType' object has no attribute 'text'
+2025-02-02 11:31:28,029 - INFO - 127.0.0.1 - - [02/Feb/2025 11:31:28] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 11:37:41,391 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 11:37:41,392 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 11:37:44,623 - INFO - 127.0.0.1 - - [02/Feb/2025 11:37:44] "GET /health HTTP/1.1" 200 -
+2025-02-02 11:37:48,691 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 11:37:48,692 - INFO - Code generation started
+2025-02-02 11:37:48,692 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 11:37:55,762 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 11:37:55,764 - INFO - 127.0.0.1 - - [02/Feb/2025 11:37:55] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 11:39:52,869 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 11:39:52,869 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 11:39:56,272 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 11:39:56,273 - INFO - Code generation started
+2025-02-02 11:39:56,273 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 11:40:02,024 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 11:40:02,024 - ERROR - An unexpected error occurred: local variable 'e' referenced before assignment
+2025-02-02 11:40:02,026 - INFO - 127.0.0.1 - - [02/Feb/2025 11:40:02] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 11:40:34,236 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 11:40:34,236 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 11:40:37,286 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 11:40:37,287 - INFO - Code generation started
+2025-02-02 11:40:37,287 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 11:40:44,780 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 11:40:44,785 - INFO - 127.0.0.1 - - [02/Feb/2025 11:40:44] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 19:55:40,144 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 19:55:40,144 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 19:55:44,442 - INFO - 127.0.0.1 - - [02/Feb/2025 19:55:44] "GET /health HTTP/1.1" 200 -
+2025-02-02 19:55:54,598 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 19:55:54,598 - INFO - Code generation started
+2025-02-02 19:55:54,599 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 19:56:00,454 - INFO - Code generation completed
+2025-02-02 19:56:00,455 - INFO - Filename generation started
+2025-02-02 19:56:00,685 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 19:56:00,686 - INFO - 127.0.0.1 - - [02/Feb/2025 19:56:00] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 19:59:03,303 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 19:59:03,304 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 19:59:26,610 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 19:59:26,611 - INFO - Code generation started
+2025-02-02 19:59:26,611 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 19:59:34,971 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 19:59:34,972 - INFO - 127.0.0.1 - - [02/Feb/2025 19:59:34] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 20:00:50,961 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 20:00:50,961 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 20:00:56,229 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 20:00:56,229 - INFO - Code generation started
+2025-02-02 20:00:56,230 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 20:01:02,306 - INFO - An unexpected error occurred: 'int' object is not callable
+2025-02-02 20:01:02,309 - INFO - 127.0.0.1 - - [02/Feb/2025 20:01:02] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 20:03:17,919 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 20:03:17,919 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 20:03:20,144 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 20:03:20,144 - INFO - Code generation started
+2025-02-02 20:03:20,144 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 20:03:28,228 - INFO - LLM response generated
+2025-02-02 20:03:28,229 - INFO - Code generation completed
+2025-02-02 20:03:28,229 - INFO - Filename generation started
+2025-02-02 20:03:28,455 - INFO - LLM response generated
+2025-02-02 20:03:28,456 - INFO - Filename generation completed
+2025-02-02 20:03:28,457 - ERROR - An unexpected error occurred: 'str' object has no attribute 'text'
+2025-02-02 20:03:28,460 - INFO - 127.0.0.1 - - [02/Feb/2025 20:03:28] "[35m[1mPOST /code HTTP/1.1[0m" 500 -
+2025-02-02 20:06:20,911 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-02 20:06:20,911 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-02 20:06:24,756 - INFO - Received data: {'topic': 'Write a code for pythagorus theorm', 'language': 'python'}
+2025-02-02 20:06:24,756 - INFO - Code generation started
+2025-02-02 20:06:24,756 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Write a code for pythagorus theorm.
+Write the program in python language.
+2025-02-02 20:06:32,766 - INFO - LLM response generated
+2025-02-02 20:06:32,769 - INFO - Code generation completed
+2025-02-02 20:06:32,770 - INFO - Filename generation started
+2025-02-02 20:06:32,975 - INFO - LLM response generated
+2025-02-02 20:06:32,976 - INFO - Filename generation completed
+2025-02-02 20:06:32,976 - INFO - File saved successfully
+2025-02-02 20:06:32,980 - INFO - 127.0.0.1 - - [02/Feb/2025 20:06:32] "POST /code HTTP/1.1" 200 -
+2025-02-02 20:09:10,115 - INFO - Received data: {'topic': 'Fibonacci series', 'language': 'python'}
+2025-02-02 20:09:10,116 - INFO - Code generation started
+2025-02-02 20:09:10,116 - INFO - Code Prompt - You are an assitant esxpert in coding languages. You can write programing codes in Pytho, C and Java languages.
+Write a program on the topic - Fibonacci series.
+Write the program in python language.
+2025-02-02 20:09:15,891 - INFO - LLM response generated
+2025-02-02 20:09:15,891 - INFO - Code generation completed
+2025-02-02 20:09:15,891 - INFO - Filename generation started
+2025-02-02 20:09:16,091 - INFO - LLM response generated
+2025-02-02 20:09:16,091 - INFO - Filename generation completed
+2025-02-02 20:09:16,092 - INFO - File saved successfully
+2025-02-02 20:09:16,094 - INFO - 127.0.0.1 - - [02/Feb/2025 20:09:16] "POST /code HTTP/1.1" 200 -

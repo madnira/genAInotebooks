@@ -1,0 +1,111 @@
+Several Python programs can demonstrate the Pythagorean theorem, depending on what you want the program to *do*. Here are a few options:
+
+**Option 1: Calculating the hypotenuse**
+
+This program takes the lengths of two sides of a right-angled triangle as input and calculates the length of the hypotenuse.
+
+```python
+import math
+
+def pythagorean_hypotenuse(a, b):
+  """Calculates the hypotenuse of a right-angled triangle.
+
+  Args:
+    a: Length of one side.
+    b: Length of the other side.
+
+  Returns:
+    The length of the hypotenuse.  Returns an error message if input is invalid.
+  """
+  if a < 0 or b < 0:
+    return "Error: Side lengths cannot be negative."
+  return math.sqrt(a**2 + b**2)
+
+# Get input from the user
+try:
+  a = float(input("Enter the length of side a: "))
+  b = float(input("Enter the length of side b: "))
+  hypotenuse = pythagorean_hypotenuse(a, b)
+  print(f"The length of the hypotenuse is: {hypotenuse}")
+except ValueError:
+  print("Invalid input. Please enter numbers only.")
+
+```
+
+**Option 2: Checking if a triangle is a right-angled triangle**
+
+This program takes the lengths of all three sides of a triangle as input and checks if it satisfies the Pythagorean theorem (a² + b² = c²).
+
+```python
+import math
+
+def is_right_triangle(a, b, c):
+  """Checks if a triangle is a right-angled triangle.
+
+  Args:
+    a: Length of side a.
+    b: Length of side b.
+    c: Length of side c (hypotenuse).
+
+  Returns:
+    True if it's a right-angled triangle, False otherwise. Returns an error if input is invalid.
+  """
+  if a <=0 or b <= 0 or c <= 0:
+    return "Error: Side lengths cannot be non-positive."
+  sides = sorted([a, b, c])
+  a, b, c = sides[0], sides[1], sides[2] #Ensure c is hypotenuse
+
+  return math.isclose(a**2 + b**2, c**2)
+
+
+# Get input from the user
+try:
+  a = float(input("Enter the length of side a: "))
+  b = float(input("Enter the length of side b: "))
+  c = float(input("Enter the length of side c: "))
+  if is_right_triangle(a,b,c):
+    print("It is a right-angled triangle.")
+  else:
+    print("It is not a right-angled triangle.")
+except ValueError:
+  print("Invalid input. Please enter numbers only.")
+
+```
+
+**Option 3:  Finding a missing side**
+
+This is a more general function that can calculate any missing side given the other two.
+
+```python
+import math
+
+def pythagorean(a=None, b=None, c=None):
+    """Calculates the missing side of a right-angled triangle.
+
+    Args:
+      a: Length of side a (can be None if calculating a)
+      b: Length of side b (can be None if calculating b)
+      c: Length of side c (hypotenuse, can be None if calculating c)
+
+    Returns:
+      The length of the missing side, or an error message if input is invalid.
+
+    """
+    if sum(1 for x in [a,b,c] if x is not None) != 2:
+        return "Error: Exactly two sides must be provided"
+    if a is None:
+        return math.sqrt(c**2 - b**2)
+    elif b is None:
+        return math.sqrt(c**2 - a**2)
+    else:
+        return math.sqrt(a**2 + b**2)
+
+
+# Example usage
+print(pythagorean(a=3, b=4))  # Output: 5.0
+print(pythagorean(a=5, c=13)) # Output: 12.0
+print(pythagorean(b=12, c=15)) #Output: 9.0
+print(pythagorean(a=3,b=4, c=5)) # Output: Error
+```
+
+Remember to choose the option that best suits your needs.  The third option is the most robust and versatile.  All options include basic error handling for invalid input.
