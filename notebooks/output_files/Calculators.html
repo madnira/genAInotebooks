@@ -1,0 +1,98 @@
+This Java program implements a simple calculator that can perform addition, subtraction, multiplication, and division. It also includes error handling for division by zero and invalid input.  It's structured to be easily expandable with more operations.
+
+```java
+import java.util.Scanner;
+
+public class CalculatorSeries {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nSelect operation:");
+            System.out.println("1. Add");
+            System.out.println("2. Subtract");
+            System.out.println("3. Multiply");
+            System.out.println("4. Divide");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter choice(1/2/3/4/5): ");
+            int choice;
+            try {
+                choice = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 5.");
+                scanner.next(); // Consume the invalid input
+                continue;
+            }
+
+
+            if (choice == 5) {
+                break;
+            }
+
+            System.out.print("Enter first number: ");
+            double num1;
+            try {
+                num1 = scanner.nextDouble();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // Consume the invalid input
+                continue;
+            }
+
+            System.out.print("Enter second number: ");
+            double num2;
+            try {
+                num2 = scanner.nextDouble();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // Consume the invalid input
+                continue;
+            }
+
+
+            double result = 0;
+            boolean error = false;
+
+            switch (choice) {
+                case 1:
+                    result = num1 + num2;
+                    break;
+                case 2:
+                    result = num1 - num2;
+                    break;
+                case 3:
+                    result = num1 * num2;
+                    break;
+                case 4:
+                    if (num2 == 0) {
+                        System.out.println("Error: Division by zero!");
+                        error = true;
+                    } else {
+                        result = num1 / num2;
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+                    error = true;
+                    break;
+            }
+
+            if (!error) {
+                System.out.println("Result: " + result);
+            }
+        }
+        scanner.close();
+        System.out.println("Exiting calculator.");
+    }
+}
+```
+
+To compile and run this code:
+
+1. **Save:** Save the code as `CalculatorSeries.java`.
+2. **Compile:** Open a terminal or command prompt and navigate to the directory where you saved the file.  Then compile using: `javac CalculatorSeries.java`
+3. **Run:** Execute the compiled code using: `java CalculatorSeries`
+
+The program will then prompt you to select an operation and enter numbers.  It handles invalid input and division by zero gracefully. Remember to handle potential exceptions appropriately in a real-world application.  This example provides a basic framework that can be extended with more advanced features.
