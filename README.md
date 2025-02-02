@@ -4,6 +4,10 @@
 *model folder* contains the hugging face models saved locally
 -- all-mpnet-base-v2 model Readme file which shares the details of this open source model from hugging face
 
+*prompts folder* contains all the prompt templates used in the corresponding notebooks / applications
+
+*output_files folder*  contains all the outputs generated during corresponding notebooks execution
+
 *notebooks folder* contains all the jupyter notebook files
 - chunking.ipynb -> PyPDF library is used to extract texts from pdf files and create chunks
 - embedding.ipynb -> opens source *sentence transformer* models are used from hugging face to create text embeddings from the chunked files. Storing the HF models locally is also demonstrated in this notebook
