@@ -1,0 +1,51 @@
+Several ways exist to print even numbers from 1 to 50 in C. Here are two versions: one using a `for` loop and another using a `while` loop.
+
+**Version 1: Using a `for` loop**
+
+This version is generally considered more concise and readable for this specific task.
+
+```c
+#include <stdio.h>
+
+int main() {
+  // Iterate through even numbers from 2 to 50 (incrementing by 2)
+  for (int i = 2; i <= 50; i += 2) {
+    printf("%d ", i);
+  }
+  printf("\n"); // Add a newline at the end for better formatting
+  return 0;
+}
+```
+
+**Version 2: Using a `while` loop**
+
+This version demonstrates a slightly different approach, but achieves the same result.
+
+```c
+#include <stdio.h>
+
+int main() {
+  int i = 2;
+  while (i <= 50) {
+    printf("%d ", i);
+    i += 2; // Increment by 2 to get the next even number
+  }
+  printf("\n"); // Add a newline at the end for better formatting
+  return 0;
+}
+```
+
+Both programs will produce the same output:
+
+```
+2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50
+```
+
+Remember to compile and run these codes using a C compiler (like GCC)  before executing them.  For example, to compile and run the first version using GCC, you would use these commands in your terminal:
+
+```bash
+gcc your_file_name.c -o even_numbers
+./even_numbers
+```
+
+Replace `your_file_name.c` with the actual name of your C source file.

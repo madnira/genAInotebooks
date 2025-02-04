@@ -1,0 +1,82 @@
+Several versions are provided below to demonstrate different aspects of C programming and error handling.
+
+**Version 1:  Basic Implementation**
+
+This version is straightforward and assumes the user will input a valid, positive radius.
+
+```c
+#include <stdio.h>
+
+int main() {
+  float radius, area;
+
+  printf("Enter the radius of the circle: ");
+  scanf("%f", &radius);
+
+  area = 3.14159 * radius * radius; //Using a constant for pi
+
+  printf("The area of the circle is: %.2f\n", area);
+  return 0;
+}
+```
+
+
+**Version 2:  Input Validation**
+
+This version includes basic input validation to check for negative radius values.
+
+```c
+#include <stdio.h>
+
+int main() {
+  float radius, area;
+
+  printf("Enter the radius of the circle: ");
+  if (scanf("%f", &radius) != 1 || radius < 0) {
+    printf("Invalid input. Please enter a positive number.\n");
+    return 1; // Indicate an error
+  }
+
+  area = 3.14159 * radius * radius;
+
+  printf("The area of the circle is: %.2f\n", area);
+  return 0;
+}
+```
+
+**Version 3: Using `math.h` for Pi**
+
+This version uses the `M_PI` constant from the `math.h` library for a more accurate value of pi.  Remember to compile with `-lm` (link math library).
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+  float radius, area;
+
+  printf("Enter the radius of the circle: ");
+  if (scanf("%f", &radius) != 1 || radius < 0) {
+    printf("Invalid input. Please enter a positive number.\n");
+    return 1;
+  }
+
+  area = M_PI * radius * radius;
+
+  printf("The area of the circle is: %.2f\n", area);
+  return 0;
+}
+```
+
+**How to compile and run:**
+
+1. **Save:** Save any of the above code snippets as a `.c` file (e.g., `circle_area.c`).
+2. **Compile:** Open a terminal or command prompt and use a C compiler (like GCC) to compile the code:
+   ```bash
+   gcc circle_area.c -o circle_area -lm  //The -lm flag is only needed for Version 3
+   ```
+3. **Run:** Execute the compiled program:
+   ```bash
+   ./circle_area
+   ```
+The program will then prompt you to enter the radius.  Remember that Version 2 and 3 will handle invalid input more gracefully than Version 1.  Choose the version that best suits your needs and understanding of C programming.

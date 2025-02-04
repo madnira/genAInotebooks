@@ -5,6 +5,7 @@ import google.generativeai as genai
 import os , jinja2, logging
 import requests
 from dotenv import load_dotenv
+import json
 
 from LLMservice import LLMcall
 
@@ -88,8 +89,9 @@ def generate_code():
             #code_response = code(topic, language, code_prompt)
             rendered_code_prompt = code_prompt.render(topic=topic, language=language)
             code_payload = {"prompt": rendered_code_prompt}
-            code_response = requests.post(LLMurl, json=code_payload)
+            code_response_payload = requests.post(LLMurl, json=code_payload)
             
+            code_response = code_response_payload.json()["generated_text"]          
 
             if code_response is None:
                 return jsonify({"error": "Code generation failed"}), 500
@@ -97,8 +99,11 @@ def generate_code():
                 #code_filename = filename(topic, filename_prompt)
                 rendered_filename_prompt = filename_prompt.render(topic=topic)
                 filename_payload = {"prompt": rendered_filename_prompt}
-                code_filename = requests.post(LLMurl, json=filename_payload)
+                code_filename_payload = requests.post(LLMurl, json=filename_payload)
                 
+                code_filename = code_filename_payload.json()["generated_text"]
+
+
 
                 if code_filename is None:
                     return jsonify({"error": "Filename generation failed"}), 500
@@ -109,7 +114,7 @@ def generate_code():
             file = os.path.join(output_dir, f"{code_filename}.html") 
             # save in a file
             with open(file, "w") as f:
-                f.write(str(code_response))
+                f.write(code_response)
                 logging.info("File saved successfully")
 
             return jsonify({"message": "File saved successfully)"})

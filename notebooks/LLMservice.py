@@ -4,6 +4,7 @@ import google, googleapiclient
 import google.generativeai as genai
 import os , jinja2, logging
 from dotenv import load_dotenv
+import json
 
 # Definign logging configuration
 logging.basicConfig(filename='code_app.log', level=logging.INFO,
@@ -24,8 +25,10 @@ def LLMcall():
     data = request.get_json()
     prompt = data.get("prompt")
     response = model.generate_content(prompt)
+    response_data = {"generated_text": response.text}
     logging.info("LLM response generated")
-    return jsonify({"response": f"{response.text}"})
+    return jsonify(response_data) 
+
 
 # Default healthcheck function
 
