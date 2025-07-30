@@ -5,3 +5,6 @@ langchain
 load_dotenv
 jsonify
 jinja2
+flask
+langchain_community
+unstructured
