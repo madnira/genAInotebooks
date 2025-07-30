@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finger Counter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .solution-container {
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            padding-bottom: 75%; /* 4:3 Aspect Ratio */
+        }
+        .input_video, .output_canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        .input_video {
+            /* We'll keep the video element for MediaPipe but hide it */
+            transform: scaleX(-1); /* Flip horizontally for a mirror effect */
+            display: none;
+            visibility: hidden;
+        }
+        .output_canvas {
+            transform: scaleX(-1); /* Flip canvas to match mirror effect */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-2 text-cyan-400">AI Finger Counter</h1>
+        <p class="text-center text-gray-400 mb-6">Show your hand to the camera. The app will count your fingers and log the data.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Camera and Canvas Column -->
+            <div class="md:col-span-2 bg-gray-800 p-4 rounded-lg shadow-2xl">
+                <div class="solution-container">
+                    <video class="input_video"></video>
+                    <canvas class="output_canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Controls and Data Column -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-2xl flex flex-col justify-between">
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-600 pb-2">Live Data</h2>
+                    <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                        <span class="text-lg text-gray-300">Fingers Detected:</span>
+                        <span id="finger-count" class="text-4xl font-bold text-cyan-400">0</span>
+                    </div>
+                     <p id="loading" class="text-center text-yellow-400 mt-4">Loading model... Please wait.</p>
+                </div>
+
+                <div class="mt-6">
+                    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-600 pb-2">Controls</h2>
+                    <div class="flex space-x-2 mb-4">
+                         <button id="start-camera" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed">
+                            Start Camera
+                        </button>
+                         <button id="stop-camera" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed">
+                            Stop Camera
+                        </button>
+                    </div>
+                    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-600 pb-2">Export Log</h2>
+                    <button id="download-json" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed">
+                        Download JSON
+                    </button>
+                     <p class="text-xs text-gray-500 mt-2 text-center">A log is created when the finger count changes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // --- DOM Elements ---
+        const videoElement = document.querySelector('.input_video');
+        const canvasElement = document.querySelector('.output_canvas');
+        const canvasCtx = canvasElement.getContext('2d');
+        const fingerCountElement = document.getElementById('finger-count');
+        const downloadButton = document.getElementById('download-json');
+        const loadingElement = document.getElementById('loading');
+        const startButton = document.getElementById('start-camera');
+        const stopButton = document.getElementById('stop-camera');
+
+        // --- State Management ---
+        let fingerLog = [];
+        let lastFingerCount = -1;
+        let camera = null; // To hold the Camera instance
+
+        // --- Finger Counting Logic ---
+        function countFingers(landmarks, handedness) {
+            let count = 0;
+            const fingerTips = [4, 8, 12, 16, 20];
+            const fingerPips = [3, 6, 10, 14, 18]; // PIP joints
+
+            // Determine handedness from the API result
+            const isRightHand = handedness && handedness.length > 0 && handedness[0].categoryName === 'Right';
+
+            // 1. Thumb
+            // We check if the thumb tip is further out than the joint below it (IP joint).
+            // This is more reliable across different hand orientations.
+            if (isRightHand) {
+                if (landmarks[fingerTips[0]].x < landmarks[fingerTips[0] - 1].x) {
+                    count++;
+                }
+            } else { // Left Hand
+                if (landmarks[fingerTips[0]].x > landmarks[fingerTips[0] - 1].x) {
+                    count++;
+                }
+            }
+
+            // 2. Other Four Fingers
+            // Check if the tip is "higher" (smaller y-coordinate) than the PIP joint.
+            for (let i = 1; i < 5; i++) {
+                if (landmarks[fingerTips[i]].y < landmarks[fingerPips[i]].y) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        // --- MediaPipe Hands Processing ---
+        function onResults(results) {
+            // Set canvas dimensions
+            canvasElement.width = videoElement.videoWidth;
+            canvasElement.height = videoElement.videoHeight;
+
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+            let currentFingerCount = 0;
+
+            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+                const landmarks = results.multiHandLandmarks[0];
+                const handedness = results.multiHandedness;
+
+                drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: '#FFFFFF', lineWidth: 2 });
+                drawLandmarks(canvasCtx, landmarks, { color: '#06b6d4', lineWidth: 1, radius: 4 });
+
+                let minX = 1, maxX = 0, minY = 1, maxY = 0;
+                for (const landmark of landmarks) {
+                    minX = Math.min(minX, landmark.x);
+                    maxX = Math.max(maxX, landmark.x);
+                    minY = Math.min(minY, landmark.y);
+                    maxY = Math.max(maxY, landmark.y);
+                }
+                canvasCtx.beginPath();
+                canvasCtx.strokeStyle = '#34d399';
+                canvasCtx.lineWidth = 3;
+                canvasCtx.rect(minX * canvasElement.width, minY * canvasElement.height, (maxX - minX) * canvasElement.width, (maxY - minY) * canvasElement.height);
+                canvasCtx.stroke();
+
+                currentFingerCount = countFingers(landmarks, handedness);
+            }
+
+            fingerCountElement.textContent = currentFingerCount;
+
+            if (currentFingerCount !== lastFingerCount) {
+                const timestamp = new Date().toISOString();
+                fingerLog.push({ timestamp, fingerCount: currentFingerCount });
+                console.log(`Logged: ${timestamp} - ${currentFingerCount} finger(s)`);
+                lastFingerCount = currentFingerCount;
+
+                if (fingerLog.length > 0) {
+                    downloadButton.disabled = false;
+                }
+            }
+
+            canvasCtx.restore();
+        }
+
+        const hands = new Hands({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+        });
+
+        hands.setOptions({
+            maxNumHands: 1,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+
+        hands.onResults(onResults);
+
+        // --- Camera and Controls Logic ---
+        function initializeApp() {
+            camera = new Camera(videoElement, {
+                onFrame: async () => {
+                    if (videoElement.readyState === 4) { // HAVE_ENOUGH_DATA
+                        await hands.send({ image: videoElement });
+                    }
+                },
+                width: 1280,
+                height: 720
+            });
+
+            loadingElement.textContent = 'Model loaded. Click "Start Camera".';
+            startButton.disabled = false;
+            stopButton.disabled = true;
+        }
+
+        startButton.addEventListener('click', () => {
+            camera.start();
+            startButton.disabled = true;
+            stopButton.disabled = false;
+            loadingElement.textContent = 'Camera is active.';
+        });
+
+        stopButton.addEventListener('click', () => {
+            // The Camera utility from MediaPipe doesn't have a public stop method.
+            // The most reliable way to stop it is to stop the underlying video stream tracks.
+            if (videoElement.srcObject) {
+                videoElement.srcObject.getTracks().forEach(track => track.stop());
+            }
+            videoElement.srcObject = null;
+            
+            // Clear the canvas
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            fingerCountElement.textContent = '0';
+            
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            loadingElement.textContent = 'Camera stopped. Press Start to begin again.';
+        });
+
+        // --- JSON Download ---
+        downloadButton.addEventListener('click', () => {
+            if (fingerLog.length === 0) {
+                // We'll use a custom modal/alert in a future version.
+                // For now, a simple browser alert is fine for this functionality.
+                const customAlert = document.createElement('div');
+                customAlert.textContent = "No data has been logged yet.";
+                // Simple styling for visibility
+                Object.assign(customAlert.style, {
+                    position: 'fixed', top: '10px', left: '50%', transform: 'translateX(-50%)',
+                    padding: '10px 20px', background: '#f44336', color: 'white', borderRadius: '5px',
+                    zIndex: 1000
+                });
+                document.body.appendChild(customAlert);
+                setTimeout(() => document.body.removeChild(customAlert), 3000);
+                return;
+            }
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fingerLog, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "finger_log.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        });
+        
+        // Initialize the app once the script is loaded
+        initializeApp();
+
+    </script>
+</body>
+</html>
