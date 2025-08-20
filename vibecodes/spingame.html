@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin to Win!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <style>
+        /* General body and container styling */
+        body {
+            font-family: 'Luckiest Guy', cursive;
+            background-color: #1a1a2e;
+            color: #e94560;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            background-color: #272147;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            border: 3px solid #6c63ff;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Title and Balance styling */
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #f7a049;
+            text-shadow: 3px 3px 0 #1a1a2e;
+            margin-bottom: 10px;
+        }
+
+        .balance-display {
+            font-size: 1.5rem;
+            color: #d8e3e7;
+            background-color: #3b3064;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid #6c63ff;
+            width: 100%;
+        }
+
+        /* Betting UI styling */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            font-size: 1.2rem;
+            color: #e94560;
+        }
+
+        .input-group label {
+            margin-bottom: 5px;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #6c63ff;
+            border-radius: 10px;
+            background-color: #1a1a2e;
+            color: #d8e3e7;
+            font-size: 1.2rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #f7a049;
+        }
+
+        .btn {
+            font-family: 'Luckiest Guy', cursive;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 0 #c27d3b;
+            background-color: #f7a049;
+            color: #1a1a2e;
+            text-transform: uppercase;
+        }
+
+        .btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #c27d3b;
+        }
+
+        .btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Wheel and Pointer styling */
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid #d8e3e7;
+            position: relative;
+            background: conic-gradient(
+                #e94560 0deg 45deg,
+                #6c63ff 45deg 90deg,
+                #8e44ad 90deg 135deg,
+                #f1c40f 135deg 180deg,
+                #e74c3c 180deg 225deg,
+                #3498db 225deg 270deg,
+                #9b59b6 270deg 315deg,
+                #2ecc71 315deg 360deg
+            );
+            transition: transform 5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .wheel.spinning {
+            /* The actual spin animation will be set dynamically with JS */
+        }
+
+        .wheel-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 100%;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            -webkit-text-stroke: 1px #d8e3e7;
+        }
+
+        .pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 30px solid #f7a049;
+            z-index: 10;
+        }
+
+        /* Result and messages styling */
+        .message-box {
+            background-color: #3b3064;
+            color: #e94560;
+            padding: 10px 20px;
+            border-radius: 10px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            width: 100%;
+            border: 2px solid #6c63ff;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .message-box.visible {
+            opacity: 1;
+        }
+
+        .message-box.win {
+            color: #2ecc71;
+            border-color: #2ecc71;
+        }
+
+        .message-box.lose {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 20px;
+            }
+            .wheel-container {
+                width: 250px;
+                height: 250px;
+            }
+            .wheel-number {
+                font-size: 2rem;
+            }
+            .btn {
+                font-size: 1.2rem;
+            }
+            .balance-display {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Spin to Win!</h1>
+        <div class="balance-display">Balance: $<span id="balance">100</span></div>
+        
+        <div class="message-box" id="message-box"></div>
+
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <div class="wheel" id="wheel">
+                <!-- Numbers will be added dynamically with JS -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="input-group">
+                <label for="betAmount">BET ($):</label>
+                <input type="number" id="betAmount" placeholder="Enter bet" min="1" value="10">
+            </div>
+            <div class="input-group">
+                <label for="betNumber">NUMBER (0-9):</label>
+                <input type="number" id="betNumber" placeholder="Enter number" min="0" max="9" value="5">
+            </div>
+            <button class="btn" id="spinBtn">Spin</button>
+            <button class="btn" id="resetBtn">Reset Game</button>
+        </div>
+    </div>
+
+    <script>
+        // Game state variables and constants
+        const wheelNumbers = [0, 2, 8, 9, 3, 5, 1, 6];
+        const wheelSegmentAngle = 360 / wheelNumbers.length;
+        let balance = 100;
+        let isSpinning = false;
+
+        // Get DOM elements
+        const balanceSpan = document.getElementById('balance');
+        const betAmountInput = document.getElementById('betAmount');
+        const betNumberInput = document.getElementById('betNumber');
+        const spinBtn = document.getElementById('spinBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const wheel = document.getElementById('wheel');
+        const messageBox = document.getElementById('message-box');
+
+        // Function to create and position the numbers on the wheel
+        function createWheelNumbers() {
+            wheelNumbers.forEach((number, index) => {
+                const numberDiv = document.createElement('div');
+                numberDiv.className = 'wheel-number';
+                numberDiv.textContent = number;
+                
+                // Calculate the position for each number
+                const angle = index * wheelSegmentAngle + (wheelSegmentAngle / 2); // Center of the segment
+                const x = 50 + 40 * Math.cos((angle - 90) * Math.PI / 180);
+                const y = 50 + 40 * Math.sin((angle - 90) * Math.PI / 180);
+                
+                numberDiv.style.left = `${x}%`;
+                numberDiv.style.top = `${y}%`;
+                numberDiv.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+                
+                wheel.appendChild(numberDiv);
+            });
+        }
+
+        // Function to update the balance display
+        function updateBalance() {
+            balanceSpan.textContent = balance.toFixed(2);
+        }
+
+        // Function to show a message in the message box
+        function showMessage(text, type) {
+            messageBox.textContent = text;
+            messageBox.className = `message-box visible ${type}`;
+        }
+
+        // Main game logic when the spin button is clicked
+        function handleSpin() {
+            if (isSpinning) return;
+
+            // Get and validate user input
+            const betAmount = parseFloat(betAmountInput.value);
+            const betNumber = parseInt(betNumberInput.value, 10);
+            const validNumbers = wheelNumbers;
+
+            // Simple validation checks
+            if (isNaN(betAmount) || betAmount <= 0) {
+                showMessage("Please enter a valid bet amount.", "lose");
+                return;
+            }
+            if (isNaN(betNumber) || !validNumbers.includes(betNumber)) {
+                showMessage(`Please bet on a valid number: ${validNumbers.join(', ')}.`, "lose");
+                return;
+            }
+            if (betAmount > balance) {
+                showMessage("You don't have enough money!", "lose");
+                return;
+            }
+
+            // Deduct bet from balance and disable button
+            isSpinning = true;
+            balance -= betAmount;
+            updateBalance();
+            spinBtn.disabled = true;
+            messageBox.className = 'message-box'; // Hide previous message
+
+            // Spin the wheel
+            const randomIndex = Math.floor(Math.random() * wheelNumbers.length);
+            const winningNumber = wheelNumbers[randomIndex];
+
+            // Calculate rotation for a big, random spin to land on the winning number
+            const rotationDegrees = 360 * 5 + (360 - (randomIndex * wheelSegmentAngle + wheelSegmentAngle / 2));
+            wheel.style.transform = `rotate(${rotationDegrees}deg)`;
+
+            // Handle the result after the spin animation ends
+            setTimeout(() => {
+                isSpinning = false;
+                spinBtn.disabled = false;
+
+                if (betNumber === winningNumber) {
+                    const winnings = betAmount * wheelNumbers.length;
+                    balance += winnings;
+                    showMessage(`You WIN! You won $${winnings.toFixed(2)}.`, "win");
+                } else {
+                    showMessage(`You lose. The number was ${winningNumber}.`, "lose");
+                }
+                updateBalance();
+
+                // Reset the wheel's transform to prepare for the next spin
+                wheel.style.transition = 'none';
+                wheel.style.transform = `rotate(0deg)`; // Or to a new starting point
+                setTimeout(() => {
+                    wheel.style.transition = '';
+                }, 50);
+
+            }, 5500); // Wait for the 5s transition + a bit extra
+        }
+
+        // Function to reset the game state
+        function resetGame() {
+            if (isSpinning) return;
+            balance = 100;
+            updateBalance();
+            betAmountInput.value = 10;
+            betNumberInput.value = 5;
+            messageBox.className = 'message-box';
+            wheel.style.transform = `rotate(0deg)`;
+            showMessage("Game reset. Place your bets!", "");
+        }
+
+        // Event listeners
+        spinBtn.addEventListener('click', handleSpin);
+        resetBtn.addEventListener('click', resetGame);
+        
+        // Initialize the game on load
+        window.onload = function() {
+            createWheelNumbers();
+            updateBalance();
+            showMessage("Welcome! Place your bet and spin the wheel.", "");
+        }
+    </script>
+</body>
+</html>
