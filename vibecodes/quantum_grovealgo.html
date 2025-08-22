@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classical vs. Quantum Search</title>
+    <!-- Use Tailwind CSS for a clean, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-gray-100 rounded-xl shadow-2xl p-8 max-w-4xl w-full">
+        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-indigo-500">Search Algorithm Comparison</h1>
+        <p class="text-center text-gray-600 mb-8">
+            Enter a word length below to compare the cycles and conceptual time needed for a brute-force search.
+        </p>
+
+        <!-- Input Box and Run Button -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <label for="word-size-input" class="text-gray-700 font-medium">Word Length (3-10):</label>
+            <input type="number" id="word-size-input" value="4" min="3" max="10" class="w-20 bg-white text-gray-800 text-center rounded-lg p-2 border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <button id="run-button" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                Run Simulation
+            </button>
+        </div>
+        
+        <p id="error-message" class="text-center text-red-500 mb-4 hidden">Please enter a word length between 3 and 10.</p>
+
+        <!-- Main comparison container -->
+        <div class="flex flex-col md:flex-row gap-8 justify-around items-stretch mb-8">
+
+            <!-- Classical Computer Section -->
+            <div class="flex-1 bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col items-center text-center">
+                <h2 class="text-2xl font-semibold mb-4">Classical Computing</h2>
+                <div class="flex flex-col items-center justify-center w-full mb-4">
+                    <p class="text-gray-600">Total Combinations to check:</p>
+                    <p id="classical-cycles" class="text-xl sm:text-2xl font-mono mt-2 text-red-500">---</p>
+                </div>
+                <div class="mb-4">
+                    <p class="text-gray-600">Time Needed:</p>
+                    <p id="classical-time" class="text-lg font-mono mt-2 text-gray-800">---</p>
+                </div>
+                <div class="w-full text-left mt-auto">
+                    <h3 class="text-md font-semibold text-gray-700 mb-2">Specs:</h3>
+                    <ul class="text-sm text-gray-500 list-disc list-inside">
+                        <li>Processor Speed: 1 billion operations/second</li>
+                        <li>Algorithm: Brute-force search</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Quantum Computer Section -->
+            <div class="flex-1 bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col items-center text-center">
+                <h2 class="text-2xl font-semibold mb-4">Quantum Computing</h2>
+                <div class="flex flex-col items-center justify-center w-full mb-4">
+                    <p class="text-gray-600">Cycles needed (Grover's Algorithm):</p>
+                    <p id="quantum-cycles" class="text-xl sm:text-2xl font-mono mt-2 text-green-500">---</p>
+                </div>
+                <div class="mb-4">
+                    <p class="text-gray-600">Time Needed:</p>
+                    <p id="quantum-time" class="text-lg font-mono mt-2 text-gray-800">---</p>
+                    <p class="text-gray-600 mt-2">Qubits Needed:</p>
+                    <p id="qubits-needed" class="text-lg font-mono mt-1 text-gray-800">---</p>
+                </div>
+                <div class="w-full text-left mt-auto">
+                    <h3 class="text-md font-semibold text-gray-700 mb-2">Specs:</h3>
+                    <ul class="text-sm text-gray-500 list-disc list-inside">
+                        <li>Gate Time: 1 microsecond/operation</li>
+                        <li>Algorithm: Grover's search algorithm</li>
+                        <li>Qubits: Based on word length</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('run-button').addEventListener('click', runSimulation);
+        
+        function formatTime(seconds) {
+            if (seconds < 1e-6) return (seconds * 1e9).toFixed(2) + ' ns';
+            if (seconds < 1e-3) return (seconds * 1e6).toFixed(2) + ' μs';
+            if (seconds < 1) return (seconds * 1000).toFixed(2) + ' ms';
+            if (seconds < 60) return seconds.toFixed(2) + ' seconds';
+            if (seconds < 3600) return (seconds / 60).toFixed(2) + ' minutes';
+            if (seconds < 86400) return (seconds / 3600).toFixed(2) + ' hours';
+            if (seconds < 3.154e+7) return (seconds / 86400).toFixed(2) + ' days';
+            return (seconds / 3.154e+7).toFixed(2) + ' years';
+        }
+
+        function runSimulation() {
+            const wordSizeInput = document.getElementById('word-size-input');
+            const wordLength = parseInt(wordSizeInput.value, 10);
+            const errorMessageEl = document.getElementById('error-message');
+
+            if (isNaN(wordLength) || wordLength < 3 || wordLength > 10) {
+                errorMessageEl.classList.remove('hidden');
+                return;
+            } else {
+                errorMessageEl.classList.add('hidden');
+            }
+
+            // Define the character set
+            const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;':,./<>?`~";
+            const n = alphabet.length;
+
+            // Get elements to display results
+            const classicalCyclesEl = document.getElementById('classical-cycles');
+            const classicalTimeEl = document.getElementById('classical-time');
+            const quantumCyclesEl = document.getElementById('quantum-cycles');
+            const quantumTimeEl = document.getElementById('quantum-time');
+            const qubitsNeededEl = document.getElementById('qubits-needed');
+            const runButtonEl = document.getElementById('run-button');
+
+            // Disable button and show loading state
+            runButtonEl.disabled = true;
+            runButtonEl.textContent = 'Running...';
+            classicalCyclesEl.textContent = 'Calculating...';
+            quantumCyclesEl.textContent = 'Calculating...';
+            classicalTimeEl.textContent = '---';
+            quantumTimeEl.textContent = '---';
+            qubitsNeededEl.textContent = '---';
+
+            // Start the simulation after a small delay to show "Calculating..."
+            setTimeout(() => {
+                // --- Calculations based on word length ---
+                const classicalCycles = Math.pow(n, wordLength);
+                const quantumCycles = Math.sqrt(classicalCycles);
+                const qubitsNeeded = Math.ceil(Math.log2(classicalCycles));
+                
+                // --- Time assumptions for realistic comparison ---
+                // Classical: Assuming 1 billion cycles per second (1e9)
+                const classicalTimeInSeconds = classicalCycles / 1e9;
+                
+                // Quantum: Assuming 1 microsecond per gate operation (1e-6 seconds)
+                const quantumTimeInSeconds = quantumCycles * 1e-6;
+
+                // --- Update UI with calculated values ---
+                classicalCyclesEl.textContent = classicalCycles.toLocaleString();
+                classicalTimeEl.textContent = formatTime(classicalTimeInSeconds);
+                
+                quantumCyclesEl.textContent = parseInt(quantumCycles).toLocaleString();
+                quantumTimeEl.textContent = formatTime(quantumTimeInSeconds);
+                qubitsNeededEl.textContent = qubitsNeeded;
+
+                // Re-enable the button
+                runButtonEl.disabled = false;
+                runButtonEl.textContent = 'Run Simulation';
+
+            }, 500); // 500ms delay to simulate work
+        }
+    </script>
+</body>
+</html>
